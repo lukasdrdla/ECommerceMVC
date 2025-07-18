@@ -5,6 +5,10 @@ VisualStudioVersion = 17.12.35728.132 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerceMVC.Domain", "ECommerceMVC.Domain\ECommerceMVC.Domain.csproj", "{F9354062-FF8D-45E8-AD4D-FB22C6848A18}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerceMVC.Infrastructure", "ECommerceMVC.Infrastructure\ECommerceMVC.Infrastructure.csproj", "{858E25EB-8DC9-4666-AC69-BC9A96835965}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerceMVC.Application", "ECommerceMVC.Application\ECommerceMVC.Application.csproj", "{D2AB86C5-E8B9-4761-A0EB-062464AE809F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{F9354062-FF8D-45E8-AD4D-FB22C6848A18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9354062-FF8D-45E8-AD4D-FB22C6848A18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9354062-FF8D-45E8-AD4D-FB22C6848A18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{858E25EB-8DC9-4666-AC69-BC9A96835965}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{858E25EB-8DC9-4666-AC69-BC9A96835965}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{858E25EB-8DC9-4666-AC69-BC9A96835965}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{858E25EB-8DC9-4666-AC69-BC9A96835965}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2AB86C5-E8B9-4761-A0EB-062464AE809F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2AB86C5-E8B9-4761-A0EB-062464AE809F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2AB86C5-E8B9-4761-A0EB-062464AE809F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2AB86C5-E8B9-4761-A0EB-062464AE809F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
