@@ -22,7 +22,7 @@ namespace ECommerceMVC.Domain.Entities
         public string? ImageUrl { get; set; }
         public bool IsOnSale => DiscountPercentage > 0;
         public ICollection<ProductVariantAttribute> Attributes { get; set; } = new List<ProductVariantAttribute>();
-
+        public ICollection<ProductVariantImage> ProductVariantImages { get; set; } = new List<ProductVariantImage>();
 
     }
 
