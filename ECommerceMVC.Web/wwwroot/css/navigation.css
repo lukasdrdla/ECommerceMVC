@@ -1,0 +1,190 @@
+/* Navigation Styles - Minimalist Black Design */
+.main-header {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-bottom: 1px solid #eee;
+}
+
+.logo {
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #000 !important;
+    text-decoration: none;
+}
+
+.logo:hover {
+    color: #333 !important;
+    text-decoration: none;
+}
+
+.search-container {
+    max-width: 500px;
+}
+
+.search-input {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.search-btn {
+    border: 1px solid #ddd;
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: #000;
+    color: white;
+}
+
+.search-btn:hover {
+    background-color: #333;
+}
+
+.nav-icon {
+    font-size: 1.2rem;
+    color: #000;
+    text-decoration: none;
+    padding: 0.5rem;
+    position: relative;
+}
+
+.nav-icon:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.cart-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #000;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-nav {
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.category-nav .navbar-nav .nav-link {
+    color: #000;
+    font-weight: 500;
+    padding: 1rem 1.5rem;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.category-nav .navbar-nav .nav-link:hover {
+    color: #000;
+    border-bottom-color: #000;
+}
+
+/* Large Dropdown Menu */
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    border-radius: 0;
+    margin-top: 0;
+    min-width: 600px;
+    padding: 2rem;
+}
+
+.dropdown-menu.mega-menu {
+    width: 100%;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+}
+
+.dropdown-item {
+    color: #000;
+    padding: 0.75rem 1rem;
+    font-weight: 400;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f8f8;
+    color: #000;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+/* Mega Menu Columns */
+.mega-menu-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.mega-menu-column {
+    flex: 1;
+    min-width: 200px;
+}
+
+.mega-menu-column h6 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #000;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+.mega-menu-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mega-menu-column li {
+    margin-bottom: 0.5rem;
+}
+
+.mega-menu-column a {
+    color: #666;
+    text-decoration: none;
+    display: block;
+    padding: 0.25rem 0;
+    transition: color 0.3s ease;
+}
+
+.mega-menu-column a:hover {
+    color: #000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+    .search-container {
+        margin: 1rem 0;
+    }
+    
+    .d-lg-flex.ms-auto {
+        justify-content: center;
+        margin-top: 1rem;
+    }
+    
+    .category-nav .navbar-nav {
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .logo {
+        font-size: 1.25rem;
+    }
+    
+    .search-container {
+        width: 100%;
+    }
+}

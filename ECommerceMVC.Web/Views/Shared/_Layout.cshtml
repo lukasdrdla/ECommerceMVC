@@ -1,0 +1,274 @@
+﻿<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ECommerce Shop</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/navigation.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ECommerceMVC.Web.styles.css" asp-append-version="true" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Horní navigační panel -->
+    <header class="main-header">
+        <nav class="navbar navbar-expand-lg bg-white py-3">
+            <div class="container">
+                <!-- Logo vlevo -->
+                <a class="logo" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-shopping-bag"></i> EShop
+                </a>
+
+                <!-- Hamburger menu pro mobil -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <!-- Vyhledávání uprostřed -->
+                    <div class="mx-auto">
+                        <div class="search-container d-flex">
+                            <input class="form-control search-input flex-grow-1" type="search" placeholder="Hledat produkty..." aria-label="Search">
+                            <button class="btn search-btn" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Košík a účet vpravo -->
+                    <div class="d-flex align-items-center ms-3">
+                        <a href="#" class="nav-icon me-3" title="Můj účet">
+                            <i class="fas fa-user"></i>
+                        </a>
+                        <a href="#" class="nav-icon" title="Košík">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-badge">0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+    <!-- Hlavní navigační menu -->
+    <nav class="category-nav">
+        <div class="container">
+            <ul class="navbar-nav d-flex flex-row justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">Domů</a>
+                </li>
+                
+                <!-- Elektronika - Mega Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        Elektronika
+                    </a>
+                    <div class="dropdown-menu mega-menu">
+                        <div class="mega-menu-content">
+                            <div class="mega-menu-column">
+                                <h6>Mobilní telefony</h6>
+                                <ul>
+                                    <li><a href="#">iPhone</a></li>
+                                    <li><a href="#">Samsung Galaxy</a></li>
+                                    <li><a href="#">Huawei</a></li>
+                                    <li><a href="#">Xiaomi</a></li>
+                                    <li><a href="#">OnePlus</a></li>
+                                    <li><a href="#">Příslušenství k telefonům</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-menu-column">
+                                <h6>Počítače a notebooky</h6>
+                                <ul>
+                                    <li><a href="#">Herní notebooky</a></li>
+                                    <li><a href="#">Pracovní notebooky</a></li>
+                                    <li><a href="#">All-in-One PC</a></li>
+                                    <li><a href="#">Stolní PC</a></li>
+                                    <li><a href="#">Gaming sestavy</a></li>
+                                    <li><a href="#">Komponenty PC</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-menu-column">
+                                <h6>Audio a video</h6>
+                                <ul>
+                                    <li><a href="#">Smart TV</a></li>
+                                    <li><a href="#">Soundbary</a></li>
+                                    <li><a href="#">Sluchátka</a></li>
+                                    <li><a href="#">Projektory</a></li>
+                                    <li><a href="#">Reproduktory</a></li>
+                                    <li><a href="#">Streamování</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                
+                <!-- Móda - Mega Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        Móda & oblečení
+                    </a>
+                    <div class="dropdown-menu mega-menu">
+                        <div class="mega-menu-content">
+                            <div class="mega-menu-column">
+                                <h6>Pánská móda</h6>
+                                <ul>
+                                    <li><a href="#">Trička a polokošile</a></li>
+                                    <li><a href="#">Košile</a></li>
+                                    <li><a href="#">Kalhoty a džíny</a></li>
+                                    <li><a href="#">Mikiny a svetry</a></li>
+                                    <li><a href="#">Bundy a kabáty</a></li>
+                                    <li><a href="#">Spodní prádlo</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-menu-column">
+                                <h6>Dámská móda</h6>
+                                <ul>
+                                    <li><a href="#">Šaty</a></li>
+                                    <li><a href="#">Halenky a topy</a></li>
+                                    <li><a href="#">Kalhoty a legíny</a></li>
+                                    <li><a href="#">Sukně</a></li>
+                                    <li><a href="#">Bundy a kabáty</a></li>
+                                    <li><a href="#">Spodní prádlo</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-menu-column">
+                                <h6>Obuv a doplňky</h6>
+                                <ul>
+                                    <li><a href="#">Pánská obuv</a></li>
+                                    <li><a href="#">Dámská obuv</a></li>
+                                    <li><a href="#">Sportovní obuv</a></li>
+                                    <li><a href="#">Kabelky</a></li>
+                                    <li><a href="#">Hodinky</a></li>
+                                    <li><a href="#">Šperky</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                
+                <!-- Domov & zahrada -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        Domov & zahrada
+                    </a>
+                    <div class="dropdown-menu mega-menu">
+                        <div class="mega-menu-content">
+                            <div class="mega-menu-column">
+                                <h6>Nábytek</h6>
+                                <ul>
+                                    <li><a href="#">Obývací pokoj</a></li>
+                                    <li><a href="#">Ložnice</a></li>
+                                    <li><a href="#">Kuchyně a jídelna</a></li>
+                                    <li><a href="#">Kancelář</a></li>
+                                    <li><a href="#">Dětský pokoj</a></li>
+                                    <li><a href="#">Předsíň</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-menu-column">
+                                <h6>Zahrada</h6>
+                                <ul>
+                                    <li><a href="#">Zahradní nábytek</a></li>
+                                    <li><a href="#">Grilování</a></li>
+                                    <li><a href="#">Zahradní technika</a></li>
+                                    <li><a href="#">Rostliny a květiny</a></li>
+                                    <li><a href="#">Bazény</a></li>
+                                    <li><a href="#">Zahradní domky</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-menu-column">
+                                <h6>Domácí potřeby</h6>
+                                <ul>
+                                    <li><a href="#">Kuchyňské potřeby</a></li>
+                                    <li><a href="#">Úklid a prádelna</a></li>
+                                    <li><a href="#">Dekorace</a></li>
+                                    <li><a href="#">Osvětlení</a></li>
+                                    <li><a href="#">Textil</a></li>
+                                    <li><a href="#">Koupelna</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                
+                <!-- Sport -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        Sport & fitness
+                    </a>
+                    <div class="dropdown-menu mega-menu">
+                        <div class="mega-menu-content">
+                            <div class="mega-menu-column">
+                                <h6>Fitness</h6>
+                                <ul>
+                                    <li><a href="#">Posilování</a></li>
+                                    <li><a href="#">Kardio stroje</a></li>
+                                    <li><a href="#">Jóga a pilates</a></li>
+                                    <li><a href="#">Doplňky stravy</a></li>
+                                    <li><a href="#">Fitness oblečení</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-menu-column">
+                                <h6>Outdoor sporty</h6>
+                                <ul>
+                                    <li><a href="#">Běh</a></li>
+                                    <li><a href="#">Cyklistika</a></li>
+                                    <li><a href="#">Turistika</a></li>
+                                    <li><a href="#">Lyžování</a></li>
+                                    <li><a href="#">Vodní sporty</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-menu-column">
+                                <h6>Týmové sporty</h6>
+                                <ul>
+                                    <li><a href="#">Fotbal</a></li>
+                                    <li><a href="#">Basketbal</a></li>
+                                    <li><a href="#">Tenis</a></li>
+                                    <li><a href="#">Volejbal</a></li>
+                                    <li><a href="#">Hokej</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Auto & moto</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Knihy</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Slevy</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="bg-dark text-light mt-5">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>EShop</h5>
+                    <p class="mb-0">Váš spolehlivý partner pro online nákupy</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">&copy; 2025 EShop - Všechna práva vyhrazena</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
