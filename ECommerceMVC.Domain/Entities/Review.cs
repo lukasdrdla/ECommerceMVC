@@ -7,8 +7,8 @@ public class Review
     public string Comment { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public int ProductId { get; set; }
-    public Product Product { get; set; } = new Product();
+    public Product Product { get; set; }
 
     public string CustomerId { get; set; } = string.Empty;
-    public AppUser Customer { get; set; } = new AppUser();
+    public AppUser Customer { get; set; }
 }

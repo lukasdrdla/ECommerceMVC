@@ -11,7 +11,7 @@ public class RefundRequest
     public int Id { get; set; }
 
     public int OrderItemId { get; set; }
-    public OrderItem OrderItem { get; set; } = new OrderItem();
+    public OrderItem OrderItem { get; set; }
 
     public DateTime RequestedAt { get; set; } = DateTime.UtcNow;
     public string Reason { get; set; } = string.Empty;

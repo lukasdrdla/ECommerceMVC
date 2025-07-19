@@ -8,10 +8,10 @@
         public string Description { get; set; } = string.Empty;
 
         public int CategoryId { get; set; }
-        public Category Category { get; set; } = new Category();
+        public Category Category { get; set; }
 
         public int BrandId { get; set; }
-        public Brand Brand { get; set; } = new Brand();
+        public Brand Brand { get; set; }
 
         public bool IsActive { get; set; } = true;
         public bool IsHomePageFeatured { get; set; } = false;
