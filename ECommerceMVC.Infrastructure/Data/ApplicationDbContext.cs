@@ -37,6 +37,8 @@ public class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, string>
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+        
         // Složený klíč pro ProductTag
         modelBuilder.Entity<ProductTag>()
             .HasKey(pt => new { pt.ProductId, pt.TagId });
@@ -162,16 +164,7 @@ public class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, string>
             new Tag { Id = 5, Name = "Výprodej" },
             new Tag { Id = 6, Name = "Prémiové" }
         );
-        
-        // Produktové štítky
-        modelBuilder.Entity<ProductTag>().HasData(
-            new ProductTag { ProductId = 1, TagId = 1 }, // iPhone 15 Pro - Novinka
-            new ProductTag { ProductId = 2, TagId = 2 }, // Samsung Galaxy S23 - Akce
-            new ProductTag { ProductId = 3, TagId = 3 }, // Dell XPS 13 - Doprava zdarma
-            new ProductTag { ProductId = 4, TagId = 4 }, // Asus ROG Strix - Bestseller
-            new ProductTag { ProductId = 5, TagId = 5 }, // Reolink Argus 3 - Výprodej
-            new ProductTag { ProductId = 6, TagId = 6 } // Nike Air Zoom - Prémiové
-        );
+                
 
         // Sklad
         modelBuilder.Entity<Warehouse>().HasData(
@@ -214,162 +207,134 @@ public class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, string>
             new Product
             {
                 Id = 1, Name = "iPhone 15 Pro", Description = "Nejnovější Apple iPhone", CategoryId = 1, BrandId = 1,
-                IsActive = true, CreatedAt = DateTime.UtcNow
+                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
             },
             new Product
             {
                 Id = 2, Name = "Samsung Galaxy S23", Description = "Vlajkový model Samsungu", CategoryId = 1,
-                BrandId = 2, IsActive = true, CreatedAt = DateTime.UtcNow
+                BrandId = 2, IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
             },
 
             // Kategorie 2 - Notebooky a PC
             new Product
             {
                 Id = 3, Name = "Dell XPS 13", Description = "Lehký a výkonný notebook Dell", CategoryId = 2,
-                BrandId = 5, IsActive = true, CreatedAt = DateTime.UtcNow
+                BrandId = 5, IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
             },
             new Product
             {
                 Id = 4, Name = "Asus ROG Strix", Description = "Herní notebook Asus", CategoryId = 2, BrandId = 9,
-                IsActive = true, CreatedAt = DateTime.UtcNow
+                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
             },
 
             // Kategorie 3 - Bezpečnostní technika
             new Product
             {
                 Id = 5, Name = "Reolink Argus 3", Description = "Bezdrátová bezpečnostní kamera", CategoryId = 3,
-                BrandId = 3, IsActive = true, CreatedAt = DateTime.UtcNow
+                BrandId = 3, IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
             },
             new Product
             {
                 Id = 6, Name = "Hikvision DS-2CD", Description = "Profesionální IP kamera", CategoryId = 3, BrandId = 7,
-                IsActive = true, CreatedAt = DateTime.UtcNow
+                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
             },
 
             // Kategorie 4 - Sportovní vybavení
             new Product
             {
                 Id = 7, Name = "Nike Air Zoom", Description = "Sportovní běžecké boty", CategoryId = 4, BrandId = 4,
-                IsActive = true, CreatedAt = DateTime.UtcNow
+                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
             },
             new Product
             {
                 Id = 8, Name = "Adidas T-shirt", Description = "Pohodlné sportovní tričko", CategoryId = 4, BrandId = 4,
-                IsActive = true, CreatedAt = DateTime.UtcNow
+                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
             },
 
             // Kategorie 5 - Móda a oblečení
             new Product
             {
                 Id = 9, Name = "H&M Jeans", Description = "Stylové džíny", CategoryId = 5, BrandId = 10,
-                IsActive = true, CreatedAt = DateTime.UtcNow
+                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
             },
             new Product
             {
                 Id = 10, Name = "H&M Svetr", Description = "Teplý svetr na zimu", CategoryId = 5, BrandId = 10,
-                IsActive = true, CreatedAt = DateTime.UtcNow
+                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
             },
 
             // Kategorie 6 - Hračky a stavebnice
             new Product
             {
                 Id = 11, Name = "LEGO City Police", Description = "Policie stavebnice", CategoryId = 6, BrandId = 8,
-                IsActive = true, CreatedAt = DateTime.UtcNow
+                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
             },
             new Product
             {
                 Id = 12, Name = "LEGO Technic", Description = "Technická stavebnice pro pokročilé", CategoryId = 6,
-                BrandId = 8, IsActive = true, CreatedAt = DateTime.UtcNow
+                BrandId = 8, IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
             },
 
             // Kategorie 7 - TV a audio
             new Product
             {
                 Id = 13, Name = "Sony Bravia 55\"", Description = "4K UHD televizor", CategoryId = 7, BrandId = 7,
-                IsActive = true, CreatedAt = DateTime.UtcNow
+                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
             },
             new Product
             {
                 Id = 14, Name = "Bose SoundLink", Description = "Přenosný Bluetooth reproduktor", CategoryId = 7,
-                BrandId = 6, IsActive = true, CreatedAt = DateTime.UtcNow
+                BrandId = 6, IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
             },
 
             // Kategorie 8 - Fotoaparáty a kamery
             new Product
             {
                 Id = 15, Name = "GoPro HERO11", Description = "Akční kamera nové generace", CategoryId = 8, BrandId = 6,
-                IsActive = true, CreatedAt = DateTime.UtcNow
+                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
             },
             new Product
             {
                 Id = 16, Name = "Canon EOS R6", Description = "Profesionální bezzrcadlovka", CategoryId = 8,
-                BrandId = 7, IsActive = true, CreatedAt = DateTime.UtcNow
+                BrandId = 7, IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
             },
 
             // Kategorie 9 - Herní zóna
             new Product
             {
                 Id = 17, Name = "PlayStation 5", Description = "Nová herní konzole Sony", CategoryId = 9, BrandId = 7,
-                IsActive = true, CreatedAt = DateTime.UtcNow
+                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
             },
             new Product
             {
                 Id = 18, Name = "Xbox Series X", Description = "Výkonná konzole Microsoft", CategoryId = 9, BrandId = 9,
-                IsActive = true, CreatedAt = DateTime.UtcNow
+                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
             },
 
             // Kategorie 10 - Domácnost a chytrá zařízení
             new Product
             {
                 Id = 19, Name = "Philips Hue Starter Kit", Description = "Chytré osvětlení do domácnosti",
-                CategoryId = 10, BrandId = 7, IsActive = true, CreatedAt = DateTime.UtcNow
+                CategoryId = 10, BrandId = 7, IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
             },
             new Product
             {
                 Id = 20, Name = "Google Nest Hub", Description = "Chytrý domácí asistent", CategoryId = 10, BrandId = 7,
-                IsActive = true, CreatedAt = DateTime.UtcNow
+                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
             }
         );
 
 
-        // Produkty
-        modelBuilder.Entity<Product>().HasData(
-            new Product
-            {
-                Id = 1, Name = "iPhone 15 Pro", Description = "Nový iPhone 15 Pro s výkonem A17 Bionic.",
-                CategoryId = 1, BrandId = 1, IsActive = true, CreatedAt = DateTime.UtcNow
-            },
-            new Product
-            {
-                Id = 2, Name = "Samsung Galaxy S23", Description = "Vlajková loď Samsung s kvalitním displejem.",
-                CategoryId = 1, BrandId = 2, IsActive = true, CreatedAt = DateTime.UtcNow
-            },
-            new Product
-            {
-                Id = 3, Name = "Dell XPS 13", Description = "Lehký a výkonný ultrabook pro profesionály.",
-                CategoryId = 2, BrandId = 3, IsActive = true, CreatedAt = DateTime.UtcNow
-            },
-            new Product
-            {
-                Id = 4, Name = "Nike Air Zoom Pegasus", Description = "Běžecké boty s maximálním komfortem.",
-                CategoryId = 3, BrandId = 4, IsActive = true, CreatedAt = DateTime.UtcNow
-            },
-            new Product
-            {
-                Id = 5, Name = "Reolink Argus 3", Description = "Bezdrátová bezpečnostní kamera s nočním viděním.",
-                CategoryId = 4, BrandId = 5, IsActive = true, CreatedAt = DateTime.UtcNow
-            },
-            new Product
-            {
-                Id = 6, Name = "Adidas T-shirt", Description = "Pohodlné tričko z organické bavlny.", CategoryId = 3,
-                BrandId = 6, IsActive = true, CreatedAt = DateTime.UtcNow
-            },
-            new Product
-            {
-                Id = 7, Name = "LEGO City Police", Description = "Stavebnice pro malé stavitele.", CategoryId = 5,
-                BrandId = 7, IsActive = true, CreatedAt = DateTime.UtcNow
-            }
+        // Produktové štítky
+        modelBuilder.Entity<ProductTag>().HasData(
+            new ProductTag { ProductId = 1, TagId = 1 }, // iPhone 15 Pro - Novinka
+            new ProductTag { ProductId = 2, TagId = 2 }, // Samsung Galaxy S23 - Akce
+            new ProductTag { ProductId = 3, TagId = 3 }, // Dell XPS 13 - Doprava zdarma
+            new ProductTag { ProductId = 4, TagId = 4 }, // Asus ROG Strix - Bestseller
+            new ProductTag { ProductId = 5, TagId = 5 }, // Reolink Argus 3 - Výprodej
+            new ProductTag { ProductId = 6, TagId = 6 } // Nike Air Zoom - Prémiové
         );
+
 
         // Varianty produktů
         modelBuilder.Entity<ProductVariant>().HasData(
@@ -449,67 +414,57 @@ public class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, string>
                 { Id = 10, ProductVariantId = 10, ImageUrl = "/images/variants/lego_city_police.jpg", IsMain = true }
         );
 
-        // Uživatelé
-        Guid adminId = Guid.NewGuid();
-        Guid userId = Guid.NewGuid();
-
-        var hasher = new PasswordHasher<AppUser>();
-
-        var admin = new AppUser
-        {
-            Id = adminId.ToString(),
-            UserName = "admin@admin.com",
-            Email = "admin@admin.com",
-            NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
-            EmailConfirmed = true,
-            FirstName = "Admin",
-            LastName = "Test",
-            AdressLine1 = "123 Main St",
-            AdressLine2 = "Apt 4B",
-            City = "Prague",
-            PostalCode = "11000",
-            Country = "Czech Republic",
-            SecurityStamp = Guid.NewGuid().ToString(),
-        };
-
-        admin.PasswordHash = hasher.HashPassword(admin, "Admin123!");
-
-        var user = new AppUser
-        {
-            Id = userId.ToString(),
-            UserName = "user@user.com",
-            NormalizedUserName = "USER@USER.COM",
-            Email = "user@user.com",
-            NormalizedEmail = "USER@USER.COM",
-            EmailConfirmed = true,
-            FirstName = "User",
-            LastName = "Test",
-            AdressLine1 = "456 Oak Street",
-            AdressLine2 = null,
-            City = "Brno",
-            PostalCode = "60200",
-            Country = "Czech Republic",
-            SecurityStamp = Guid.NewGuid().ToString(),
-        };
-        
-        
-        user.PasswordHash = hasher.HashPassword(user, "User123!");
-        modelBuilder.Entity<AppUser>().HasData(admin, user);
+        // Uživatelé s předem vygenerovanými hash hesly
+        modelBuilder.Entity<AppUser>().HasData(
+            new AppUser
+            {
+                Id = "e067f58c-77d3-4c91-9e99-65e56a479bed",
+                UserName = "admin@admin.com",
+                NormalizedUserName = "ADMIN@ADMIN.COM",
+                Email = "admin@admin.com",
+                NormalizedEmail = "ADMIN@ADMIN.COM",
+                EmailConfirmed = true,
+                FirstName = "Admin",
+                LastName = "Test",
+                AdressLine1 = "123 Main St",
+                AdressLine2 = "Apt 4B",
+                City = "Prague",
+                PostalCode = "11000",
+                Country = "Czech Republic",
+                SecurityStamp = "e067f58c-77d3-4c91-9e99-65e56a479bed",
+                PasswordHash = "AQAAAAIAAYagAAAAEKpJ0s7HKbFjJUuPiqdsDMlqvn8F4CZFbELwW5JLBpKvGF3HU8kJ5Q4Z6Hq8tQ2m9Q==" // Admin123!
+            },
+            new AppUser
+            {
+                Id = "f067f58c-77d3-4c91-9e99-65e56a479bed",
+                UserName = "user@user.com",
+                NormalizedUserName = "USER@USER.COM",
+                Email = "user@user.com",
+                NormalizedEmail = "USER@USER.COM",
+                EmailConfirmed = true,
+                FirstName = "User",
+                LastName = "Test",
+                AdressLine1 = "456 Oak Street",
+                AdressLine2 = null,
+                City = "Brno",
+                PostalCode = "60200",
+                Country = "Czech Republic",
+                SecurityStamp = "f067f58c-77d3-4c91-9e99-65e56a479bed",
+                PasswordHash = "AQAAAAIAAYagAAAAEDcWJHQu0zQ9TiIYwJK1AUteBrK6YNbN2h5oeXZG9Kkn7RHFDMIQg3fT9RqUrcpFMA==" // User123!
+            }
+        );
         
         // Role
-        Guid adminRoleId = Guid.NewGuid();
-        Guid userRoleId = Guid.NewGuid();
-        
         modelBuilder.Entity<AppRole>().HasData(
             new AppRole
             {
-                Id = adminRoleId.ToString(),
+                Id = "e267f58c-77d3-4c91-9e99-65e56a479bed",
                 Name = "Admin",
                 NormalizedName = "ADMIN"
             },
             new AppRole
             {
-                Id = userRoleId.ToString(),
+                Id = "f267a58c-77d3-4c91-9e99-65e56a479bed",
                 Name = "User",
                 NormalizedName = "USER"
             }
@@ -519,37 +474,35 @@ public class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, string>
         modelBuilder.Entity<IdentityUserRole<string>>().HasData(
             new IdentityUserRole<string>
             {
-                UserId = admin.Id,
-                RoleId = adminRoleId.ToString()
+                UserId = "e067f58c-77d3-4c91-9e99-65e56a479bed",
+                RoleId = "e267f58c-77d3-4c91-9e99-65e56a479bed"
             },
             new IdentityUserRole<string>
             {
-                UserId = user.Id,
-                RoleId = userRoleId.ToString()
+                UserId = "f067f58c-77d3-4c91-9e99-65e56a479bed",
+                RoleId = "f267a58c-77d3-4c91-9e99-65e56a479bed"
             }
         );
         
         // Skladové zásoby
         modelBuilder.Entity<Inventory>().HasData(
-            new Inventory { Id = 1, ProductVariantId = 1, WarehouseId = 1, Quantity = 50 },  // iPhone 15 Pro 128GB černý
-            new Inventory { Id = 2, ProductVariantId = 2, WarehouseId = 1, Quantity = 0 },   // iPhone 15 Pro 256GB bílý - vyprodáno
-            new Inventory { Id = 3, ProductVariantId = 3, WarehouseId = 1, Quantity = 70 },  // Samsung S23 128GB zelený
-            new Inventory { Id = 4, ProductVariantId = 4, WarehouseId = 2, Quantity = 40 },  // Samsung S23 256GB růžový
-            new Inventory { Id = 5, ProductVariantId = 5, WarehouseId = 2, Quantity = 25 },  // Dell XPS 13 i7 16GB
-            new Inventory { Id = 6, ProductVariantId = 6, WarehouseId = 3, Quantity = 120 }, // Nike Air Zoom vel.42
-            new Inventory { Id = 7, ProductVariantId = 7, WarehouseId = 3, Quantity = 100 }, // Nike Air Zoom vel.44
-            new Inventory { Id = 8, ProductVariantId = 8, WarehouseId = 1, Quantity = 100 }, // Reolink Argus3 černý
-            new Inventory { Id = 9, ProductVariantId = 9, WarehouseId = 3, Quantity = 0 },   // Adidas tričko M - vyprodáno
-            new Inventory { Id = 10, ProductVariantId = 10, WarehouseId = 2, Quantity = 300 } // Lego City Police
+            new Inventory { Id = 1, ProductVariantId = 1, WarehouseId = 1, Quantity = 50 }, 
+            new Inventory { Id = 2, ProductVariantId = 2, WarehouseId = 1, Quantity = 0 },   
+            new Inventory { Id = 3, ProductVariantId = 3, WarehouseId = 1, Quantity = 70 },  
+            new Inventory { Id = 4, ProductVariantId = 4, WarehouseId = 2, Quantity = 40 },  
+            new Inventory { Id = 5, ProductVariantId = 5, WarehouseId = 2, Quantity = 25 },  
+            new Inventory { Id = 6, ProductVariantId = 6, WarehouseId = 3, Quantity = 120 }, 
+            new Inventory { Id = 7, ProductVariantId = 7, WarehouseId = 3, Quantity = 100 }
+
         );
         
         // Objednávky
         modelBuilder.Entity<Order>().HasData(
-            new Order { Id = 1, CustomerId = adminId.ToString(), OrderDate = new DateTime(2025, 7, 1, 14, 30, 0), TotalAmount = 64998m, ShippingMethodId = 1 },
-            new Order { Id = 2, CustomerId = userId.ToString(), OrderDate = new DateTime(2025, 7, 3, 9, 0, 0), TotalAmount = 3299m, ShippingMethodId = 2 },
-            new Order { Id = 3, CustomerId = adminId.ToString(), OrderDate = new DateTime(2025, 7, 5, 16, 45, 0), TotalAmount = 1499m, ShippingMethodId = 3 },
-            new Order { Id = 4, CustomerId = userId.ToString(), OrderDate = new DateTime(2025, 7, 6, 11, 15, 0), TotalAmount = 29999m, ShippingMethodId = 1 },
-            new Order { Id = 5, CustomerId = userId.ToString(), OrderDate = new DateTime(2025, 7, 7, 18, 0, 0), TotalAmount = 599m, ShippingMethodId = 2 }
+            new Order { Id = 1, CustomerId = "e067f58c-77d3-4c91-9e99-65e56a479bed", OrderDate = new DateTime(2025, 7, 1, 14, 30, 0), TotalAmount = 64998m, ShippingMethodId = 1 },
+            new Order { Id = 2, CustomerId = "f067f58c-77d3-4c91-9e99-65e56a479bed", OrderDate = new DateTime(2025, 7, 3, 9, 0, 0), TotalAmount = 3299m, ShippingMethodId = 2 },
+            new Order { Id = 3, CustomerId = "e067f58c-77d3-4c91-9e99-65e56a479bed", OrderDate = new DateTime(2025, 7, 5, 16, 45, 0), TotalAmount = 1499m, ShippingMethodId = 3 },
+            new Order { Id = 4, CustomerId = "f067f58c-77d3-4c91-9e99-65e56a479bed", OrderDate = new DateTime(2025, 7, 6, 11, 15, 0), TotalAmount = 29999m, ShippingMethodId = 1 },
+            new Order { Id = 5, CustomerId = "f067f58c-77d3-4c91-9e99-65e56a479bed", OrderDate = new DateTime(2025, 7, 7, 18, 0, 0), TotalAmount = 599m, ShippingMethodId = 2 }
         );
         
         // Položky objednávek
@@ -571,10 +524,10 @@ public class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, string>
         
         // Recenze
         modelBuilder.Entity<Review>().HasData(
-            new Review { Id = 1, Rating = 5, Comment = "Skvělý telefon, výborná výdrž baterie.", CreatedAt = new DateTime(2025, 7, 2), ProductId = 1, CustomerId = userId.ToString()},
-            new Review { Id = 3, Rating = 3, Comment = "Funguje, ale občas se seká.", CreatedAt = new DateTime(2025, 7, 4), ProductId = 2, CustomerId = userId.ToString() },
-            new Review { Id = 4, Rating = 5, Comment = "Úžasné sluchátka, perfektní zvuk.", CreatedAt = new DateTime(2025, 7, 5), ProductId = 5, CustomerId = userId.ToString() },
-            new Review { Id = 5, Rating = 2, Comment = "Velikost neodpovídá, vracím.", CreatedAt = new DateTime(2025, 7, 6), ProductId = 6, CustomerId = adminId.ToString() }
+            new Review { Id = 1, Rating = 5, Comment = "Skvělý telefon, výborná výdrž baterie.", CreatedAt = new DateTime(2025, 7, 2), ProductId = 1, CustomerId = "f067f58c-77d3-4c91-9e99-65e56a479bed"},
+            new Review { Id = 3, Rating = 3, Comment = "Funguje, ale občas se seká.", CreatedAt = new DateTime(2025, 7, 4), ProductId = 2, CustomerId = "f067f58c-77d3-4c91-9e99-65e56a479bed" },
+            new Review { Id = 4, Rating = 5, Comment = "Úžasné sluchátka, perfektní zvuk.", CreatedAt = new DateTime(2025, 7, 5), ProductId = 5, CustomerId = "f067f58c-77d3-4c91-9e99-65e56a479bed" },
+            new Review { Id = 5, Rating = 2, Comment = "Velikost neodpovídá, vracím.", CreatedAt = new DateTime(2025, 7, 6), ProductId = 6, CustomerId = "e067f58c-77d3-4c91-9e99-65e56a479bed" }
         );
 
         
