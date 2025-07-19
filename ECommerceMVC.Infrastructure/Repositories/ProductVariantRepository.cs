@@ -30,16 +30,18 @@ public class ProductVariantRepository : IProductVariantRepository
             .ToListAsync();
     }
 
-    public async Task AddAsync(ProductVariant productVariant)
+    public async Task<ProductVariant> AddAsync(ProductVariant productVariant)
     {
         await _context.ProductVariants.AddAsync(productVariant);
         await _context.SaveChangesAsync();
+        return productVariant;
     }
 
-    public async Task UpdateAsync(ProductVariant productVariant)
+    public async Task<ProductVariant> UpdateAsync(ProductVariant productVariant)
     {
         _context.ProductVariants.Update(productVariant);
         await _context.SaveChangesAsync();
+        return productVariant;
     }
 
     public async Task DeleteAsync(int id)
@@ -50,5 +52,14 @@ public class ProductVariantRepository : IProductVariantRepository
             _context.ProductVariants.Remove(productVariant);
             await _context.SaveChangesAsync();
         }
+    }
+
+    public async Task<IEnumerable<ProductVariant>> GetVariantsByProductIdAsync(int productId)
+    {
+        return await _context.ProductVariants
+            .Include(pv => pv.Product)
+            .Include(pv => pv.ProductVariantImages)
+            .Where(pv => pv.ProductId == productId)
+            .ToListAsync();
     }
 }

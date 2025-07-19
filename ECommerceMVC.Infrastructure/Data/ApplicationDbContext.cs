@@ -201,128 +201,7 @@ public class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, string>
         );
 
 
-        // Produkty
-        modelBuilder.Entity<Product>().HasData(
-            // Kategorie 1 - Mobilní telefony
-            new Product
-            {
-                Id = 1, Name = "iPhone 15 Pro", Description = "Nejnovější Apple iPhone", CategoryId = 1, BrandId = 1,
-                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
-            },
-            new Product
-            {
-                Id = 2, Name = "Samsung Galaxy S23", Description = "Vlajkový model Samsungu", CategoryId = 1,
-                BrandId = 2, IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
-            },
-
-            // Kategorie 2 - Notebooky a PC
-            new Product
-            {
-                Id = 3, Name = "Dell XPS 13", Description = "Lehký a výkonný notebook Dell", CategoryId = 2,
-                BrandId = 5, IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
-            },
-            new Product
-            {
-                Id = 4, Name = "Asus ROG Strix", Description = "Herní notebook Asus", CategoryId = 2, BrandId = 9,
-                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
-            },
-
-            // Kategorie 3 - Bezpečnostní technika
-            new Product
-            {
-                Id = 5, Name = "Reolink Argus 3", Description = "Bezdrátová bezpečnostní kamera", CategoryId = 3,
-                BrandId = 3, IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
-            },
-            new Product
-            {
-                Id = 6, Name = "Hikvision DS-2CD", Description = "Profesionální IP kamera", CategoryId = 3, BrandId = 7,
-                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
-            },
-
-            // Kategorie 4 - Sportovní vybavení
-            new Product
-            {
-                Id = 7, Name = "Nike Air Zoom", Description = "Sportovní běžecké boty", CategoryId = 4, BrandId = 4,
-                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
-            },
-            new Product
-            {
-                Id = 8, Name = "Adidas T-shirt", Description = "Pohodlné sportovní tričko", CategoryId = 4, BrandId = 4,
-                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
-            },
-
-            // Kategorie 5 - Móda a oblečení
-            new Product
-            {
-                Id = 9, Name = "H&M Jeans", Description = "Stylové džíny", CategoryId = 5, BrandId = 10,
-                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
-            },
-            new Product
-            {
-                Id = 10, Name = "H&M Svetr", Description = "Teplý svetr na zimu", CategoryId = 5, BrandId = 10,
-                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
-            },
-
-            // Kategorie 6 - Hračky a stavebnice
-            new Product
-            {
-                Id = 11, Name = "LEGO City Police", Description = "Policie stavebnice", CategoryId = 6, BrandId = 8,
-                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
-            },
-            new Product
-            {
-                Id = 12, Name = "LEGO Technic", Description = "Technická stavebnice pro pokročilé", CategoryId = 6,
-                BrandId = 8, IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
-            },
-
-            // Kategorie 7 - TV a audio
-            new Product
-            {
-                Id = 13, Name = "Sony Bravia 55\"", Description = "4K UHD televizor", CategoryId = 7, BrandId = 7,
-                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
-            },
-            new Product
-            {
-                Id = 14, Name = "Bose SoundLink", Description = "Přenosný Bluetooth reproduktor", CategoryId = 7,
-                BrandId = 6, IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
-            },
-
-            // Kategorie 8 - Fotoaparáty a kamery
-            new Product
-            {
-                Id = 15, Name = "GoPro HERO11", Description = "Akční kamera nové generace", CategoryId = 8, BrandId = 6,
-                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
-            },
-            new Product
-            {
-                Id = 16, Name = "Canon EOS R6", Description = "Profesionální bezzrcadlovka", CategoryId = 8,
-                BrandId = 7, IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
-            },
-
-            // Kategorie 9 - Herní zóna
-            new Product
-            {
-                Id = 17, Name = "PlayStation 5", Description = "Nová herní konzole Sony", CategoryId = 9, BrandId = 7,
-                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
-            },
-            new Product
-            {
-                Id = 18, Name = "Xbox Series X", Description = "Výkonná konzole Microsoft", CategoryId = 9, BrandId = 9,
-                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
-            },
-
-            // Kategorie 10 - Domácnost a chytrá zařízení
-            new Product
-            {
-                Id = 19, Name = "Philips Hue Starter Kit", Description = "Chytré osvětlení do domácnosti",
-                CategoryId = 10, BrandId = 7, IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
-            },
-            new Product
-            {
-                Id = 20, Name = "Google Nest Hub", Description = "Chytrý domácí asistent", CategoryId = 10, BrandId = 7,
-                IsActive = true, CreatedAt = new DateTime(2025, 7, 19)
-            }
-        );
+        
 
 
         // Produktové štítky
@@ -528,6 +407,31 @@ public class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, string>
             new Review { Id = 3, Rating = 3, Comment = "Funguje, ale občas se seká.", CreatedAt = new DateTime(2025, 7, 4), ProductId = 2, CustomerId = "f067f58c-77d3-4c91-9e99-65e56a479bed" },
             new Review { Id = 4, Rating = 5, Comment = "Úžasné sluchátka, perfektní zvuk.", CreatedAt = new DateTime(2025, 7, 5), ProductId = 5, CustomerId = "f067f58c-77d3-4c91-9e99-65e56a479bed" },
             new Review { Id = 5, Rating = 2, Comment = "Velikost neodpovídá, vracím.", CreatedAt = new DateTime(2025, 7, 6), ProductId = 6, CustomerId = "e067f58c-77d3-4c91-9e99-65e56a479bed" }
+        );
+
+        // Obrázky produktů
+        modelBuilder.Entity<ProductImage>().HasData(
+            // iPhone 15 Pro
+            new ProductImage { Id = 1, ProductId = 1, ImageUrl = "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-naturalti­tanium-select.png", IsMain = true, DisplayOrder = 1 },
+            new ProductImage { Id = 2, ProductId = 1, ImageUrl = "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-back-naturalti­tanium-select.png", IsMain = false, DisplayOrder = 2 },
+            
+            // Samsung Galaxy S23
+            new ProductImage { Id = 3, ProductId = 2, ImageUrl = "https://images.samsung.com/is/image/samsung/p6pim/cz/galaxy-s23-series/gallery/cz-galaxy-s23-ultra-s918-sm-s918bzwceue-534851821.jpg", IsMain = true, DisplayOrder = 1 },
+            
+            // Dell XPS 13
+            new ProductImage { Id = 4, ProductId = 3, ImageUrl = "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-13-9320/media-gallery/notebook-xps-13-9320-nt-gray-gallery-4.psd", IsMain = true, DisplayOrder = 1 },
+            
+            // Asus ROG Strix
+            new ProductImage { Id = 5, ProductId = 4, ImageUrl = "https://dlcdnwebimgs.asus.com/gain/4F5BDA86-4E0A-4F80-9637-02B3B15F0E4F/w717/h525", IsMain = true, DisplayOrder = 1 },
+            
+            // Nike Air Zoom
+            new ProductImage { Id = 6, ProductId = 7, ImageUrl = "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/99486859-0ff3-46b4-949b-2d16af2ad421/custom-nike-air-force-1-low-by-you-shoes.png", IsMain = true, DisplayOrder = 1 },
+            
+            // LEGO City Police
+            new ProductImage { Id = 7, ProductId = 11, ImageUrl = "https://www.lego.com/cdn/cs/set/assets/blt2a6b9bd78a42a9fc/60316.jpg", IsMain = true, DisplayOrder = 1 },
+            
+            // Sony Bravia 55"
+            new ProductImage { Id = 8, ProductId = 13, ImageUrl = "https://www.sony.cz/image/5d02da5df552836db894cdf3cb8053a3?fmt=pjpeg&wid=440&bgcolor=FFFFFF", IsMain = true, DisplayOrder = 1 }
         );
 
         

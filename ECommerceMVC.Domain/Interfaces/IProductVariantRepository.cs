@@ -6,7 +6,8 @@ public interface IProductVariantRepository
 {
     Task<ProductVariant?> GetByIdAsync(int id);
     Task<IEnumerable<ProductVariant>> GetAllAsync();
-    Task AddAsync(ProductVariant productVariant);
-    Task UpdateAsync(ProductVariant productVariant);
+    Task<ProductVariant> AddAsync(ProductVariant productVariant);
+    Task<ProductVariant> UpdateAsync(ProductVariant productVariant);
     Task DeleteAsync(int id);
+    Task<IEnumerable<ProductVariant>> GetVariantsByProductIdAsync(int productId);
 }

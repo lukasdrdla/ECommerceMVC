@@ -1,5 +1,9 @@
 using ECommerceMVC.Domain.Entities;
 using ECommerceMVC.Infrastructure.Data;
+using ECommerceMVC.Domain.Interfaces;
+using ECommerceMVC.Infrastructure.Repositories;
+using ECommerceMVC.Application.Interfaces;
+using ECommerceMVC.Application.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +18,21 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddIdentity<AppUser, AppRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
+
+// Register Repositories
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<ICartItemRepository, CartItemRepository>();
+builder.Services.AddScoped<IProductVariantRepository, ProductVariantRepository>();
+builder.Services.AddScoped<IInventoryRepository, InventoryRepository>();
+
+// Register Application Services
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductVariantService, ProductVariantService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IBrandService, BrandService>();
 
 var app = builder.Build();
 
