@@ -1,0 +1,240 @@
+@model ECommerceMVC.Web.Models.ViewModels.ProductIndexViewModel
+@{
+    ViewData["Title"] = "Produkty";
+}
+
+<div class="product-page">
+    <!-- Hlavička stránky -->
+    <div class="page-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="page-title">Produkty</h1>
+                    <p class="text-muted">Objevte náš široký sortiment kvalitních produktů</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <div class="product-count">
+                        <span class="text-muted">Zobrazeno produktů: <strong>@Model.Products.Count()</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container py-4">
+        <div class="row">
+            <!-- Produkty - plná šířka pro teď -->
+            <div class="col-12">
+                <!-- Řazení -->
+                <div class="products-toolbar">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div class="sort-options">
+                            <select class="form-select sort-select">
+                                <option>Řadit podle relevance</option>
+                                <option>Nejnovější</option>
+                                <option>Název A-Z</option>
+                            </select>
+                        </div>
+                        <div class="view-toggle">
+                            <button class="btn-view active" data-view="grid">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button class="btn-view" data-view="list">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seznam produktů -->
+                <div class="products-grid" id="products-container">
+                    @if (Model.Products.Any())
+                    {
+                        @foreach (var product in Model.Products)
+                        {
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="https://via.placeholder.com/300x300?text=@Uri.EscapeDataString(product.Name)" 
+                                         alt="@product.Name" 
+                                         class="img-fluid">
+                                    <div class="product-overlay">
+                                        <a href="@Url.Action("Details", new { id = product.Id })" class="btn-quick-view">
+                                            <i class="fas fa-eye"></i> Zobrazit detail
+                                        </a>
+                                    </div>
+                                    @if (product.IsHomePageFeatured)
+                                    {
+                                        <span class="product-badge featured">Doporučujeme</span>
+                                    }
+                                    @if (product.CreatedAt > DateTime.Now.AddDays(-7))
+                                    {
+                                        <span class="product-badge new">Novinka</span>
+                                    }
+                                </div>
+                                
+                                <div class="product-info">
+                                    <h3 class="product-name">
+                                        <a href="@Url.Action("Details", new { id = product.Id })">
+                                            @product.Name
+                                        </a>
+                                    </h3>
+                                    <p class="product-description">@product.Description</p>
+                                    
+                                    <div class="product-price">
+                                        @if (product.Variants.Any())
+                                        {
+                                            var minPrice = product.Variants.Min(v => v.Price);
+                                            var maxPrice = product.Variants.Max(v => v.Price);
+                                            
+                                            @if (minPrice == maxPrice)
+                                            {
+                                                <span class="price-current">@minPrice.ToString("C", new System.Globalization.CultureInfo("cs-CZ"))</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="price-current">@minPrice.ToString("C", new System.Globalization.CultureInfo("cs-CZ")) - @maxPrice.ToString("C", new System.Globalization.CultureInfo("cs-CZ"))</span>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <span class="price-current">Cena na dotaz</span>
+                                        }
+                                    </div>
+                                    
+                                    <div class="product-actions">
+                                        <button class="btn-add-cart" data-product-id="@product.Id">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            Přidat do košíku
+                                        </button>
+                                        <button class="btn-wishlist" data-product-id="@product.Id">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="no-products">
+                            <div class="text-center py-5">
+                                <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
+                                <h4>Žádné produkty nenalezeny</h4>
+                                <p class="text-muted">Prozatím nejsou k dispozici žádné produkty.</p>
+                                <a href="@Url.Action("Index", "Home")" class="btn btn-primary">
+                                    Zpět na domovskou stránku
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Přepínání zobrazení grid/list
+        $('.btn-view').click(function() {
+            $('.btn-view').removeClass('active');
+            $(this).addClass('active');
+            
+            const view = $(this).data('view');
+            const container = $('#products-container');
+            
+            if (view === 'list') {
+                container.removeClass('products-grid').addClass('products-list');
+            } else {
+                container.removeClass('products-list').addClass('products-grid');
+            }
+        });
+
+        // Seznam přání
+        $('.btn-wishlist').click(function() {
+            $(this).toggleClass('active');
+            const icon = $(this).find('i');
+            icon.toggleClass('far fas');
+            
+            // Zde by bylo volání API pro seznam přání
+            console.log('Wishlist toggled for product:', $(this).data('product-id'));
+        });
+
+        // Rychlý náhled
+        $('.btn-quick-view').click(function() {
+            const productId = $(this).data('product-id');
+            // Zde by bylo otevření modalu s detailem produktu
+            console.log('Quick view for product:', productId);
+        });
+
+        // Přidání do košíku (simulace)
+        $('.btn-add-cart').click(function() {
+            const productId = $(this).data('product-id');
+            const button = $(this);
+            
+            // Animace přidání
+            button.html('<i class="fas fa-spinner fa-spin"></i> Přidávám...');
+            
+            setTimeout(() => {
+                button.html('<i class="fas fa-check"></i> Přidáno');
+                button.addClass('btn-success').removeClass('btn-add-cart');
+                
+                setTimeout(() => {
+                    button.html('<i class="fas fa-shopping-cart"></i> Přidat do košíku');
+                    button.removeClass('btn-success').addClass('btn-add-cart');
+                }, 2000);
+            }, 1000);
+            
+            console.log('Add to cart:', productId);
+        });
+
+        <script>
+        // Přidání do košíku
+        $('.btn-add-cart').click(function() {
+            const productId = $(this).data('product-id');
+            
+            $.post('@Url.Action("AddItem", "Cart")', {
+                productId: productId,
+                quantity: 1
+            }).done(function(data) {
+                if (data.success) {
+                    // Aktualizace počtu v košíku
+                    $('.cart-badge').text(data.itemsCount);
+                    
+                    // Toast notifikace
+                    showToast('Produkt byl přidán do košíku', 'success');
+                } else {
+                    showToast(data.message, 'error');
+                }
+            });
+        });
+
+        // Seznam přání
+        $('.btn-wishlist').click(function() {
+            $(this).toggleClass('active');
+            const icon = $(this).find('i');
+            icon.toggleClass('far fas');
+        });
+
+        // Přepínání zobrazení
+        $('.btn-view').click(function() {
+            $('.btn-view').removeClass('active');
+            $(this).addClass('active');
+            
+            const view = $(this).data('view');
+            const container = $('#products-container');
+            
+            if (view === 'list') {
+                container.removeClass('products-grid').addClass('products-list');
+            } else {
+                container.removeClass('products-list').addClass('products-grid');
+            }
+        });
+
+        // Toast funkce
+        function showToast(message, type) {
+            // Implementace toast notifikace
+            console.log(type + ': ' + message);
+        }
+    </script>
+}

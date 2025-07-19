@@ -1,0 +1,293 @@
+@model ProductDetailViewModel
+@{
+    ViewData["Title"] = Model.Product.Name;
+}
+
+<div class="product-detail-container">
+    <!-- Breadcrumb navigace -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Domů</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Product" asp-action="Index">Produkty</a></li>
+            <li class="breadcrumb-item">@Model.Product.Category?.Name</li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.Product.Name</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <!-- Obrázky produktu -->
+        <div class="col-lg-6">
+            <div class="product-images">
+                @if (Model.Product.Images?.Any() == true)
+                {
+                    <div class="main-image mb-3">
+                        <img src="@Model.Product.Images.First().ImageUrl" 
+                             alt="@Model.Product.Name" 
+                             class="img-fluid rounded shadow-sm main-product-image">
+                    </div>
+                    
+                    @if (Model.Product.Images.Count() > 1)
+                    {
+                        <div class="image-thumbnails">
+                            <div class="row g-2">
+                                @foreach (var image in Model.Product.Images.Take(4))
+                                {
+                                    <div class="col-3">
+                                        <img src="@image.ImageUrl" 
+                                             alt="@Model.Product.Name" 
+                                             class="img-fluid rounded thumbnail-image cursor-pointer"
+                                             onclick="changeMainImage('@image.ImageUrl')">
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="no-image-placeholder">
+                        <i class="fas fa-image fa-5x text-muted"></i>
+                        <p class="text-muted mt-2">Obrázek není dostupný</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Informace o produktu -->
+        <div class="col-lg-6">
+            <div class="product-info">
+                <!-- Název a rating -->
+                <h1 class="product-title">@Model.Product.Name</h1>
+                
+                <div class="product-rating mb-3">
+                    <div class="stars">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            @if (i <= Model.AverageRating)
+                            {
+                                <i class="fas fa-star text-warning"></i>
+                            }
+                            else if (i - 0.5 <= Model.AverageRating)
+                            {
+                                <i class="fas fa-star-half-alt text-warning"></i>
+                            }
+                            else
+                            {
+                                <i class="far fa-star text-muted"></i>
+                            }
+                        }
+                    </div>
+                    <span class="rating-text ms-2">
+                        (@Model.AverageRating.ToString("F1")) • @Model.ReviewsCount hodnocení
+                    </span>
+                </div>
+
+                <!-- Cena -->
+                <div class="product-price mb-4">
+                    @if (Model.Product.Variants?.Any() == true)
+                    {
+                        var mainVariant = Model.Product.Variants.First();
+                        @if (mainVariant.IsOnSale)
+                        {
+                            <span class="original-price text-muted text-decoration-line-through">
+                                @mainVariant.Price.ToString("C", new System.Globalization.CultureInfo("cs-CZ"))
+                            </span>
+                            <span class="sale-price text-danger fw-bold fs-3 ms-2">
+                                @((mainVariant.Price * 0.8m).ToString("C", new System.Globalization.CultureInfo("cs-CZ")))
+                            </span>
+                            <span class="badge bg-danger ms-2">SLEVA</span>
+                        }
+                        else
+                        {
+                            <span class="current-price fw-bold fs-3">
+                                @mainVariant.Price.ToString("C", new System.Globalization.CultureInfo("cs-CZ"))
+                            </span>
+                        }
+                    }
+                </div>
+
+                <!-- Popis -->
+                <div class="product-description mb-4">
+                    <h5>Popis produktu</h5>
+                    <p class="text-muted">@Model.Product.Description</p>
+                </div>
+
+                <!-- Varianty produktu -->
+                @if (Model.ProductVariants?.Any() == true)
+                {
+                    <div class="product-variants mb-4">
+                        <h5>Varianty produktu</h5>
+                        <ul class="list-unstyled">
+                            @foreach (var variant in Model.ProductVariants)
+                            {
+                                <li>
+                                    <span class="fw-bold">@variant.Product.Name</span>
+                                    @if (variant.IsOnSale)
+                                    {
+                                        <span class="text-decoration-line-through text-muted">
+                                            @variant.Price.ToString("C", new System.Globalization.CultureInfo("cs-CZ"))
+                                        </span>
+                                        <span class="text-danger fw-bold">
+                                            @((variant.Price * 0.8m).ToString("C", new System.Globalization.CultureInfo("cs-CZ")))
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold">
+                                            @variant.Price.ToString("C", new System.Globalization.CultureInfo("cs-CZ"))
+                                        </span>
+                                    }
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+
+                <!-- Dostupnost -->
+                <div class="product-availability mb-4">
+                    @if (Model.IsInStock)
+                    {
+                        <div class="in-stock">
+                            <i class="fas fa-check-circle text-success"></i>
+                            <span class="text-success">Skladem (@Model.StockQuantity ks)</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="out-of-stock">
+                            <i class="fas fa-times-circle text-danger"></i>
+                            <span class="text-danger">Není skladem</span>
+                        </div>
+                    }
+                </div>
+
+                <!-- Přidat do košíku -->
+                <div class="add-to-cart-section">
+                    <form asp-action="AddToCart" method="post" class="d-flex align-items-center gap-3">
+                        <input type="hidden" name="productId" value="@Model.Product.Id" />
+                        
+                        <div class="quantity-selector">
+                            <label for="quantity" class="form-label">Množství:</label>
+                            <div class="input-group" style="width: 120px;">
+                                <button type="button" class="btn btn-outline-secondary" onclick="decreaseQuantity()">-</button>
+                                <input type="number" id="quantity" name="quantity" class="form-control text-center" 
+                                       value="1" min="1" max="@Model.StockQuantity">
+                                <button type="button" class="btn btn-outline-secondary" onclick="increaseQuantity()">+</button>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg flex-grow-1" 
+                                @(!Model.IsInStock ? "disabled" : "")>
+                            <i class="fas fa-shopping-cart me-2"></i>
+                            Přidat do košíku
+                        </button>
+                    </form>
+
+                    <!-- Další akce -->
+                    <div class="product-actions mt-3">
+                        <button class="btn btn-outline-secondary me-2">
+                            <i class="far fa-heart me-1"></i>
+                            Přidat do wishlistu
+                        </button>
+                        <button class="btn btn-outline-secondary">
+                            <i class="fas fa-share-alt me-1"></i>
+                            Sdílet
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Specifikace -->
+                @if (Model.Product.Brand != null)
+                {
+                    <div class="product-specs mt-4">
+                        <h6>Specifikace:</h6>
+                        <ul class="list-unstyled">
+                            <li><strong>Značka:</strong> @Model.Product.Brand.Name</li>
+                            <li><strong>Kategorie:</strong> @Model.Product.Category?.Name</li>
+                            
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Tagy produktu -->
+    @if (Model.Product.ProductTags?.Any() == true)
+    {
+        <div class="product-tags mt-4">
+            <h6>Tagy:</h6>
+            @foreach (var productTag in Model.Product.ProductTags)
+            {
+                <span class="badge bg-secondary me-1">@productTag.Tag?.Name</span>
+            }
+        </div>
+    }
+
+    <!-- Podobné produkty -->
+    @if (Model.RelatedProducts?.Any() == true)
+    {
+        <div class="related-products mt-5">
+            <h4 class="mb-4">Podobné produkty</h4>
+            <div class="row">
+                @foreach (var relatedProduct in Model.RelatedProducts.Take(4))
+                {
+                    <div class="col-md-3 mb-4">
+                        <div class="card product-card h-100">
+                            <div class="card-img-top bg-light d-flex align-items-center justify-content-center" 
+                                 style="height: 200px;">
+                                <i class="fas fa-image fa-2x text-muted"></i>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">@relatedProduct.Name</h6>
+                                @if (relatedProduct.Variants?.Any() == true)
+                                {
+                                    <p class="card-text">
+                                        <span class="fw-bold">
+                                            @relatedProduct.Variants.First().Price.ToString("C", new System.Globalization.CultureInfo("cs-CZ"))
+                                        </span>
+                                    </p>
+                                }
+                                <a asp-action="Details" asp-route-id="@relatedProduct.Id" 
+                                   class="btn btn-outline-primary btn-sm">
+                                    Zobrazit detail
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        function changeMainImage(imageUrl) {
+            document.querySelector('.main-product-image').src = imageUrl;
+            
+            // Zvýraznit aktivní thumbnail
+            document.querySelectorAll('.thumbnail-image').forEach(img => {
+                img.classList.remove('active-thumbnail');
+            });
+            event.target.classList.add('active-thumbnail');
+        }
+
+        function increaseQuantity() {
+            const input = document.getElementById('quantity');
+            const max = parseInt(input.getAttribute('max'));
+            const current = parseInt(input.value);
+            if (current < max) {
+                input.value = current + 1;
+            }
+        }
+
+        function decreaseQuantity() {
+            const input = document.getElementById('quantity');
+            const current = parseInt(input.value);
+            if (current > 1) {
+                input.value = current - 1;
+            }
+        }
+    </script>
+}
