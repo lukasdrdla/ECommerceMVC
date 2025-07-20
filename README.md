@@ -1,6 +1,6 @@
 MVC - Eshop
 
-In development.
+In development. old: https://github.com/lukasdrdla/TicketPortalMVC-v1
 
 <img width="1904" height="960" alt="1" src="https://github.com/user-attachments/assets/aa269346-f4ce-495f-bd82-e9fb7111305d" />
 <img width="1115" height="875" alt="2_1" src="https://github.com/user-attachments/assets/740b55f5-27c4-4819-bd18-ccff58619743" />
